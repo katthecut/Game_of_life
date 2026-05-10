@@ -92,20 +92,15 @@ void game_of_life::iscrtaj(sf::RenderWindow& window)
 
     //Grid
     sf::RectangleShape horizontalnaLinija(sf::Vector2f(800.f, 1.f));
-
     horizontalnaLinija.setFillColor(sf::Color(236, 228, 214));
 
     sf::RectangleShape vertikalnaLinija(sf::Vector2f(1.f, 400.f));
-
     vertikalnaLinija.setFillColor(sf::Color(236, 228, 214));
 
     // Horizontalne linije
     for (int i = 0; i <= REDAKA; i++)
     {
-        horizontalnaLinija.setPosition(
-            0,
-            i * velicina
-        );
+        horizontalnaLinija.setPosition(0, i * velicina);
 
         window.draw(horizontalnaLinija);
     }
@@ -113,10 +108,7 @@ void game_of_life::iscrtaj(sf::RenderWindow& window)
     // Vertikalne linije
     for (int j = 0; j <= STUPACA; j++)
     {
-        vertikalnaLinija.setPosition(
-            j * velicina,
-            0
-        );
+        vertikalnaLinija.setPosition(j * velicina, 0);
 
         window.draw(vertikalnaLinija);
     }
@@ -167,9 +159,19 @@ void game_of_life::iscrtaj(sf::RenderWindow& window)
                     boja = sf::Color(225, 164, 50);
                 }
 
-                // centariranje
+                // centriranje
                 float cx = j * velicina + velicina / 2.f;
                 float cy = i * velicina + velicina / 2.f;
+
+                sf::RectangleShape linija1(sf::Vector2f(22.f, 4.f));
+                sf::RectangleShape linija2(sf::Vector2f(22.f, 4.f));
+
+                //da X bude u sredini (tj sredina linije)
+                linija1.setOrigin(11.f, 2.f);
+                linija2.setOrigin(11.f, 2.f);
+
+                linija1.setRotation(45.f);
+                linija2.setRotation(-45.f);
 
                 linija1.setPosition(cx, cy);
                 linija2.setPosition(cx, cy);
