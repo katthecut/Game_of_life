@@ -91,21 +91,13 @@ void game_of_life::iscrtaj(sf::RenderWindow& window)
     int velicina = 20;
 
     //Grid
-    sf::RectangleShape horizontalnaLinija(
-        sf::Vector2f(800.f, 1.f)
-    );
+    sf::RectangleShape horizontalnaLinija(sf::Vector2f(800.f, 1.f));
 
-    horizontalnaLinija.setFillColor(
-        sf::Color(236, 228, 214)
-    );
+    horizontalnaLinija.setFillColor(sf::Color(236, 228, 214));
 
-    sf::RectangleShape vertikalnaLinija(
-        sf::Vector2f(1.f, 400.f)
-    );
+    sf::RectangleShape vertikalnaLinija(sf::Vector2f(1.f, 400.f));
 
-    vertikalnaLinija.setFillColor(
-        sf::Color(236, 228, 214)
-    );
+    vertikalnaLinija.setFillColor(sf::Color(236, 228, 214));
 
     // Horizontalne linije
     for (int i = 0; i <= REDAKA; i++)
@@ -141,28 +133,63 @@ void game_of_life::iscrtaj(sf::RenderWindow& window)
     linija1.setRotation(45.f);
     linija2.setRotation(-45.f);
 
-    linija1.setFillColor(sf::Color(195, 38, 95));
-    linija2.setFillColor(sf::Color(195, 38, 95));
-
-    linija1.setFillColor(
-        sf::Color(195, 38, 95)
-    );
-
-    linija2.setFillColor(
-        sf::Color(195, 38, 95)
-    );
-
     for (int i = 0; i < REDAKA; i++)
     {
         for (int j = 0; j < STUPACA; j++)
         {
             if (_generacija[i][j])
             {
+                //broj susjeda
+                int broj_susjeda = 0;
+
+                if (celija_zauzeta(i - 1, j - 1)) broj_susjeda++;
+                if (celija_zauzeta(i - 1, j)) broj_susjeda++;
+                if (celija_zauzeta(i - 1, j + 1)) broj_susjeda++;
+                if (celija_zauzeta(i, j - 1)) broj_susjeda++;
+                if (celija_zauzeta(i, j + 1)) broj_susjeda++;
+                if (celija_zauzeta(i + 1, j - 1)) broj_susjeda++;
+                if (celija_zauzeta(i + 1, j)) broj_susjeda++;
+                if (celija_zauzeta(i + 1, j + 1)) broj_susjeda++;
+
+                //boja za broj susjeda
+                sf::Color boja;
+
+                if (broj_susjeda <= 1)
+                {
+                    boja = sf::Color(70, 120, 220);
+                }
+                else if (broj_susjeda <= 3)
+                {
+                    boja = sf::Color(195, 38, 95);
+                }
+                else
+                {
+                    boja = sf::Color(225, 164, 50);
+                }
+
+                // centariranje
                 float cx = j * velicina + velicina / 2.f;
                 float cy = i * velicina + velicina / 2.f;
 
                 linija1.setPosition(cx, cy);
                 linija2.setPosition(cx, cy);
+
+                linija1.setFillColor(boja);
+                linija2.setFillColor(boja);
+
+                //sjena
+                sf::RectangleShape sjena1 = linija1;
+                sf::RectangleShape sjena2 = linija2;
+
+                sjena1.move(2.5f, 1.5f);
+                sjena2.move(2.5f, 1.5f);
+
+                sjena1.setFillColor(sf::Color(215, 198, 182));
+
+                sjena2.setFillColor(sf::Color(215, 198, 182));
+
+                window.draw(sjena1);
+                window.draw(sjena2);
 
                 window.draw(linija1);
                 window.draw(linija2);
