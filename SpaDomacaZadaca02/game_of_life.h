@@ -15,9 +15,11 @@ private:
 
     bool _generacija[REDAKA][STUPACA];
     bool _sljedeca_generacija[REDAKA][STUPACA];
+    int _starost[REDAKA][STUPACA];
 
     bool slucajna_vrijednost();
     bool celija_zauzeta(int i, int j);
+    int broj_susjeda(int i, int j);
 
 public:
     game_of_life();
