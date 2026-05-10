@@ -3,7 +3,11 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 400), "Game of Life");
+    sf::RenderWindow window(
+        sf::VideoMode(800, 400),
+        "Game of Life"
+    );
+
     window.setFramerateLimit(60);
 
     game_of_life igra;
@@ -22,14 +26,13 @@ int main()
             }
         }
 
-        // Nova generacija svake 2 sekunde
         if (sat.getElapsedTime().asSeconds() >= 2.f)
         {
             igra.sljedeca_generacija();
             sat.restart();
         }
 
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color(244, 236, 220));
 
         igra.iscrtaj(window);
 

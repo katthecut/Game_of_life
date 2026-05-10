@@ -91,10 +91,12 @@ void game_of_life::iscrtaj(sf::RenderWindow& window)
     int velicina = 20;
 
     sf::RectangleShape celija(
-        sf::Vector2f(velicina - 1, velicina - 1)
+        sf::Vector2f(velicina - 4, velicina - 4)
     );
 
-    celija.setFillColor(sf::Color::White);
+    celija.setFillColor(
+        sf::Color(120, 60, 120)
+    );
 
     for (int i = 0; i < REDAKA; i++)
     {
@@ -102,7 +104,10 @@ void game_of_life::iscrtaj(sf::RenderWindow& window)
         {
             if (_generacija[i][j])
             {
-                celija.setPosition(j * velicina, i * velicina);
+                celija.setPosition(
+                    j * velicina + 2,
+                    i * velicina + 2
+                );
 
                 window.draw(celija);
             }
