@@ -90,12 +90,66 @@ void game_of_life::iscrtaj(sf::RenderWindow& window)
 {
     int velicina = 20;
 
-    sf::RectangleShape celija(
-        sf::Vector2f(velicina - 4, velicina - 4)
+    //Grid
+    sf::RectangleShape horizontalnaLinija(
+        sf::Vector2f(800.f, 1.f)
     );
 
-    celija.setFillColor(
-        sf::Color(120, 60, 120)
+    horizontalnaLinija.setFillColor(
+        sf::Color(236, 228, 214)
+    );
+
+    sf::RectangleShape vertikalnaLinija(
+        sf::Vector2f(1.f, 400.f)
+    );
+
+    vertikalnaLinija.setFillColor(
+        sf::Color(236, 228, 214)
+    );
+
+    // Horizontalne linije
+    for (int i = 0; i <= REDAKA; i++)
+    {
+        horizontalnaLinija.setPosition(
+            0,
+            i * velicina
+        );
+
+        window.draw(horizontalnaLinija);
+    }
+
+    // Vertikalne linije
+    for (int j = 0; j <= STUPACA; j++)
+    {
+        vertikalnaLinija.setPosition(
+            j * velicina,
+            0
+        );
+
+        window.draw(vertikalnaLinija);
+    }
+
+    //X oblik
+
+    sf::RectangleShape linija1(sf::Vector2f(22.f, 4.f));
+    sf::RectangleShape linija2(sf::Vector2f(22.f, 4.f));
+
+    //da X bude u sredini (tj sredina linije)
+    linija1.setOrigin(11.f, 2.f);
+    linija2.setOrigin(11.f, 2.f);
+
+    linija1.setRotation(45.f);
+    linija2.setRotation(-45.f);
+
+    linija1.setFillColor(sf::Color(195, 38, 95));
+    linija2.setFillColor(sf::Color(195, 38, 95));
+
+    linija1.setFillColor(
+        sf::Color(195, 38, 95)
+    );
+
+    linija2.setFillColor(
+        sf::Color(195, 38, 95)
     );
 
     for (int i = 0; i < REDAKA; i++)
@@ -104,12 +158,14 @@ void game_of_life::iscrtaj(sf::RenderWindow& window)
         {
             if (_generacija[i][j])
             {
-                celija.setPosition(
-                    j * velicina + 2,
-                    i * velicina + 2
-                );
+                float cx = j * velicina + velicina / 2.f;
+                float cy = i * velicina + velicina / 2.f;
 
-                window.draw(celija);
+                linija1.setPosition(cx, cy);
+                linija2.setPosition(cx, cy);
+
+                window.draw(linija1);
+                window.draw(linija2);
             }
         }
     }
